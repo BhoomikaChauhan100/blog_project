@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['id'])) {
-    header("Location: login.html");
+    header("Location: login.php");
     exit();
 }
 ?>
@@ -26,7 +26,7 @@ if (!isset($_SESSION['id'])) {
 <h2>📝 Post Management</h2>
 
 <ul>
-    <li><a href="create_post.php">➕ Create New Post</a></li>
+    <li><a href="create_posts.php">➕ Create New Post</a></li>
     <li><a href="view_posts.php">📄 View All Posts</a></li>
 </ul>
 
@@ -36,8 +36,8 @@ if (!isset($_SESSION['id'])) {
 <h2>📂 Category Management</h2>
 
 <ul>
-    <li><a href="#">➕ Add Category</a></li>
-    <li><a href="#">📋 View Categories</a></li>
+    <li><a href="add_category.php">➕ Add Category</a></li>
+    <li><a href="view_categories.php">📋 View Categories</a></li>
 </ul>
 
 <hr>
@@ -46,8 +46,8 @@ if (!isset($_SESSION['id'])) {
 <h2>👤 User Panel</h2>
 
 <ul>
-    <li><a href="#">🙍 My Profile</a></li>
-    <li><a href="#">🔑 Change Password</a></li>
+    <li><a href="profile.php">🙍 My Profile</a></li>
+    <li><a href="change_password.php">🔑 Change Password</a></li>
 </ul>
 
 <hr>

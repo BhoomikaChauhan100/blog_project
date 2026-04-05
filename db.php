@@ -1,6 +1,6 @@
 <?php
 // Start session (optional but recommended globally)
-session_start();
+//session_start();
 
 // Database credentials
 $host = "localhost";
