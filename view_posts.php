@@ -7,7 +7,7 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
-// JOIN query (IMPORTANT 🔥)
+// JOIN query
 $sql = "SELECT posts.*, categories.name AS category_name 
         FROM posts 
         JOIN categories ON posts.category_id = categories.id 
@@ -20,6 +20,7 @@ $result = $conn->query($sql);
 <html>
 <head>
     <title>View Posts</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- optional -->
 </head>
 <body>
 
@@ -38,10 +39,26 @@ $result = $conn->query($sql);
     <?php while($row = $result->fetch_assoc()) { ?>
     <tr>
         <td><?php echo $row['id']; ?></td>
-        <td><?php echo $row['title']; ?></td>
-        <td><?php echo $row['content']; ?></td>
+
+        <!-- 👇 Title clickable bana diya -->
+        <td>
+            <a href="single_post.php?id=<?php echo $row['id']; ?>">
+                <?php echo $row['title']; ?>
+            </a>
+        </td>
+
+        <!-- 👇 Content short kar diya -->
+        <td>
+            <?php echo substr($row['content'], 0, 50); ?>...
+            <br>
+            <a href="single_post.php?id=<?php echo $row['id']; ?>">
+                Read More →
+            </a>
+        </td>
+
         <td><?php echo $row['category_name']; ?></td>
         <td><?php echo $row['created_at']; ?></td>
+
         <td>
             <a href="edit_post.php?id=<?php echo $row['id']; ?>">Edit</a> |
             <a href="delete_post.php?id=<?php echo $row['id']; ?>">Delete</a>

@@ -2,7 +2,6 @@
 session_start();
 require 'db.php';
 
-// ✅ Check login (same session name as login.php)
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
@@ -11,7 +10,6 @@ if (!isset($_SESSION['id'])) {
 $name = $description = "";
 $success = $error = "";
 
-// Form submit
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $name = trim($_POST['name']);
@@ -21,7 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Category name is required!";
     } else {
 
-        // Insert query
         $sql = "INSERT INTO categories (name, description) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $name, $description);
@@ -40,28 +37,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Add Category</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- ✅ CSS LINK -->
 </head>
 <body>
 
-<h2>📂 Add Category</h2>
+<div class="add-category container">
 
-<?php if($error) echo "<p style='color:red;'>$error</p>"; ?>
-<?php if($success) echo "<p style='color:green;'>$success</p>"; ?>
+    <h2> Add New Category</h2>
 
-<form method="POST">
+    <?php if($error) echo "<p class='error'>$error</p>"; ?>
+    <?php if($success) echo "<p class='success'>$success</p>"; ?>
 
-    <label>Category Name:</label><br>
-    <input type="text" name="name" value="<?php echo $name; ?>"><br><br>
+    <form method="POST">
 
-    <label>Description:</label><br>
-    <textarea name="description" rows="4"><?php echo $description; ?></textarea><br><br>
+        <label>Category Name</label>
+        <input type="text" name="name" placeholder="Enter category name" value="<?php echo $name; ?>">
 
-    <button type="submit">Add Category</button>
+        <label>Description</label>
+        <textarea name="description" placeholder="Write short description..."><?php echo $description; ?></textarea>
 
-</form>
+        <button type="submit"> Add Category</button>
 
-<br>
-<a href="dashboard.php">⬅ Back to Dashboard</a>
+    </form>
+
+    <a href="dashboard.php" class="back-btn">⬅ Back to Dashboard</a>
+
+</div>
 
 </body>
 </html>

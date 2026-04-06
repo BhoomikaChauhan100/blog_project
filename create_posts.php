@@ -46,9 +46,10 @@ $cat_result = $conn->query($cat_sql);
 <html>
 <head>
     <title>Create Post</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+<div class="create-post container">
 <h2>📝 Create New Post</h2>
 
 <?php if($error) echo "<p style='color:red;'>$error</p>"; ?>

@@ -10,7 +10,7 @@ if (!isset($_SESSION['id'])) {
 $user_id = $_SESSION['id'];
 
 // Fetch user data
-$sql = "SELECT name, email FROM users WHERE id = ?";
+$sql = "SELECT * FROM users WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -22,16 +22,37 @@ $user = $result->fetch_assoc();
 <html>
 <head>
     <title>My Profile</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<h2>👤 My Profile</h2>
+<div class="profile-page">
 
-<p><strong>Name:</strong> <?php echo $user['name']; ?></p>
-<p><strong>Email:</strong> <?php echo $user['email']; ?></p>
+    <div class="profile-card">
 
-<br>
-<a href="dashboard.php">⬅ Back to Dashboard</a>
+        <!-- Avatar -->
+        <div class="profile-avatar">
+            <img src="image/generic.avif" alt="User">
+        </div>
+
+        <!-- Title -->
+        <h2>👤 My Profile</h2>
+
+        <!-- Info -->
+        <div class="profile-info">
+            <p><strong>Name:</strong> <?php echo htmlspecialchars($user['name']); ?></p>
+            <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="profile-actions">
+            <a href="dashboard.php" class="back-btn">⬅ Back</a>
+            <a href="#" class="edit-profile">✏️ Edit Profile</a>
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>
