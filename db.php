@@ -9,7 +9,8 @@ $password = "";
 $database = "blog_system";
 
 // Create connection
-$conn = new mysqli($host, $username, $password, $database);
+//$conn = new mysqli($host, $username, $password, $database);
+$conn = new mysqli($host, $username, $password, $database, 3307);
 
 // Check connection
 if ($conn->connect_error) {
